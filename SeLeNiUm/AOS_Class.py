@@ -178,7 +178,7 @@ class category_page:
         return self.driver.find_elements(By.XPATH, "//div[@class='cell categoryRight']/ul/li")
 
     def select_product_click(self, product_num: int):
-        self.products_list()[product_num + 1].click()
+        self.products_list()[product_num - 1].click()
 
 
 class product_page:
