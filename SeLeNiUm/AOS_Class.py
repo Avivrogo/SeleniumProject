@@ -196,11 +196,11 @@ class product_page:
     def plus_quantity_button(self):
         return self.driver.find_element(By.CLASS_NAME, 'plus')
 
-    def plus_quantity_click(self, quantity: int):
+    def plus_quantity_click(self, quantity: str):
         for i in range(quantity - 1):
             self.plus_quantity_button().click()
 
-    def change_quantity(self, quantity: int):
+    def change_quantity(self, quantity: str):
         self.action_chains.move_to_element(self.quantity_field()).click().send_keys(quantity).perform()
         # self.quantity_field().clear().send_keys(quantity)
 
