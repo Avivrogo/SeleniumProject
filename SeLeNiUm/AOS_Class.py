@@ -13,7 +13,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 # username: eyal462
 #password: Eyal12345
 
-class PS_Home_Page:
+class Home_Page:
     def __init__(self, driver: webdriver.Chrome):
         self.driver = driver
         self.wait = WebDriverWait(self.driver, 10)
@@ -23,6 +23,13 @@ class PS_Home_Page:
 
     def account_icon(self):
         return self.driver.find_element(By.ID, 'menuUserLink')
+
+    def account_options_list(self, option: int):
+        lista = self.driver.find_elements(By.XPATH, "//a[@id='hrefUserIcon/div/label']")
+        return lista[option - 1].click()
+
+    def cart_icon(self):
+        return self.driver.find_element(By.ID, 'shoppingCartLink')
 
     def speakers_link(self):
         return self.driver.find_element(By.ID, 'speakersImg')
@@ -178,7 +185,28 @@ class product_page:
     def __init__(self, driver: webdriver.Chrome):
         self.driver = driver
         self.wait = WebDriverWait(self.driver, 10)
+        self.action_chains = ActionChains(self.driver)
 
     def add_to_cart_button(self):
         return self.driver.find_element(By.NAME, "save_to_cart")
 
+    def quantity_field(self):
+        return self.driver.find_element(By.CSS_SELECTOR, 'input[name = "quantity"]')
+
+    def plus_quantity_button(self):
+        return self.driver.find_element(By.CLASS_NAME, 'plus')
+
+    def plus_quantity_click(self, quantity: int):
+        for i in range(quantity - 1):
+            self.plus_quantity_button().click()
+
+    def change_quantity(self, quantity: int):
+        self.action_chains.move_to_element(self.quantity_field()).click().send_keys(quantity).perform()
+        # self.quantity_field().clear().send_keys(quantity)
+
+
+    def colors(self):
+        return self.driver.find_elements(By.XPATH, '//div[@ng-show="firstImageToShow"]//span')
+
+    def color_choose(self, color_num: int):
+        self.colors()[color_num + 1].click()
