@@ -72,7 +72,90 @@ class Sign_in_pop_up:
         return self.driver.find_element(By.CLASS_NAME, 'remember_me')
 
 
-class register_page:
+class Register:
     def __init__(self, driver: webdriver.Chrome):
         self.driver = driver
         self.wait = WebDriverWait(self.driver, 10)
+    def newaccount_Button(self):
+        return self.driver.find_element(By.CSS_SELECTOR, '.create-new-account.ng-scope')
+
+    def Register_Button(self):
+        return self.driver.find_element(By.CSS_SELECTOR, '#register_btnundefined')
+
+    def new_username(self):
+        return self.driver.find_element(By.NAME, 'usernameRegisterPage')
+
+    def new_username_input(self, username):
+        self.new_username().send_keys(username)
+
+    def new_email(self):
+        return self.driver.find_element(By.NAME, 'emailRegisterPage')
+
+    def new_email_input(self, email):
+        self.new_email().send_keys(email)
+
+    def new_password(self):
+        return self.driver.find_elements(By.NAME, 'passwordRegisterPage')
+
+    def new_password_input(self, password):
+        self.new_password()[0].send_keys(password)  # new password
+
+    def new_cpassword(self):
+        return self.driver.find_element(By.CSS_SELECTOR, "input[name='confirm_passwordRegisterPage']")
+
+    def new_cpassword_input(self, cpassword):
+        self.new_cpassword().send_keys(cpassword)  # confirm new password
+
+    def new_lname(self):
+        return self.driver.find_element(By.NAME, 'last_nameRegisterPage')
+
+    def new_lname_input(self, lname):
+        self.new_lname().send_keys(lname)
+
+    def new_fname(self):
+        return self.driver.find_element(By.NAME, 'first_nameRegisterPage')
+
+    def new_fname_input(self, fname):
+        self.new_fname().send_keys(fname)
+
+    def new_phone(self):
+        return self.driver.find_element(By.NAME, 'phone_numberRegisterPage')
+
+    def new_phone_input(self, phone):
+        self.new_phone().send_keys(phone)
+
+    def new_country(self):
+        return self.driver.find_element(By.NAME, 'countryListboxRegisterPage')
+    def new_country_input(self, country):
+        country_listbox = self.new_country()
+        for option in country_listbox.find_elements(By.TAG_NAME, 'option'):
+            if country in option.text:
+                option.click()  # select() in earlier versions of webdriver
+                break
+
+    def new_state(self):
+        return self.driver.find_element(By.NAME, 'state_/_province_/_regionRegisterPage')
+
+    def new_state_input(self, state):
+        self.new_state().send_keys(state)
+
+    def new_address(self):
+        return self.driver.find_element(By.NAME, 'addressRegisterPage')
+
+    def new_address_input(self, address):
+        self.new_address().send_keys(address)
+
+    def new_city(self):
+        return self.driver.find_element(By.NAME, 'cityRegisterPage')
+
+    def new_city_input(self, city):
+        self.new_city().send_keys(city)
+
+    def new_postal(self):
+        return self.driver.find_element(By.NAME, 'postal_codeRegisterPage')
+
+    def new_postal_input(self, postal):
+        self.new_postal().send_keys(postal)
+
+    def check_agree(self):
+        return self.driver.find_element(By.CSS_SELECTOR, "input[name='i_agree']")
