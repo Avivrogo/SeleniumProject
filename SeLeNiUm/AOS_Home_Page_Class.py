@@ -161,3 +161,4 @@ class Register:
 
         return self.driver.find_element(By.CSS_SELECTOR, "input[name='i_agree']")
 
+
