@@ -20,7 +20,7 @@ driver.get("https://www.advantageonlineshopping.com")
 driver.maximize_window()
 
 # Timeout
-driver.implicitly_wait(10)
+driver.implicitly_wait(6)
 sleep(5)
 
 hp = Home_Page(driver)
@@ -52,5 +52,6 @@ sleep(5)
 
 hp.account_icon().click()
 hp.account_options_list(3)
+
 
 sleep(5)
