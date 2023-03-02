@@ -25,7 +25,7 @@ class Home_Page:
         return self.driver.find_element(By.ID, 'menuUserLink')
 
     def account_options_list(self, option: int):
-        lista = self.driver.find_elements(By.XPATH, "//a[@id='hrefUserIcon/div/label']")
+        lista = self.driver.find_elements(By.XPATH, "//div[@id='loginMiniTitle']/label")
         return lista[option - 1].click()
 
     def cart_icon(self):
