@@ -158,4 +158,5 @@ class Register:
         self.new_postal().send_keys(postal)
 
     def check_agree(self):
+
         return self.driver.find_element(By.CSS_SELECTOR, "input[name='i_agree']")
