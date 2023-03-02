@@ -72,7 +72,7 @@ class Sign_in_pop_up:
         return self.driver.find_element(By.CLASS_NAME, 'remember_me')
 
 
-class Register:
+class Register_page:
     def __init__(self, driver: webdriver.Chrome):
         self.driver = driver
         self.wait = WebDriverWait(self.driver, 10)
@@ -162,4 +162,23 @@ class Register:
         return self.driver.find_element(By.CSS_SELECTOR, "input[name='i_agree']")
 
 
+class category_page:
+    def __init__(self, driver: webdriver.Chrome):
+        self.driver = driver
+        self.wait = WebDriverWait(self.driver, 10)
+
+    def products_list(self):
+        return self.driver.find_elements(By.XPATH, "//div[@class='cell categoryRight']/ul/li")
+
+    def select_product_click(self, product_num: int):
+        self.products_list()[product_num + 1].click()
+
+
+class product_page:
+    def __init__(self, driver: webdriver.Chrome):
+        self.driver = driver
+        self.wait = WebDriverWait(self.driver, 10)
+
+    def add_to_cart_button(self):
+        return self.driver.find_element(By.NAME, "save_to_cart")
 

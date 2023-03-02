@@ -7,7 +7,7 @@ from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
-from AOS_Home_Page_Class import PS_Home_Page, Sign_in_pop_up
+from AOS_Class import PS_Home_Page, Sign_in_pop_up
 
 service_chrome = Service(r'C:\selenium\chromedriver.exe')
 
