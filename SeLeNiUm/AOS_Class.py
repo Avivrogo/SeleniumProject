@@ -28,8 +28,13 @@ class Home_Page:
         lista = self.driver.find_elements(By.XPATH, "//div[@id='loginMiniTitle']/label")
         return lista[option - 1].click()
 
+    def show_username(self):
+        return self.driver.find_element(By.CSS_SELECTOR, '[id="menuUserLink"]>span')
     def cart_icon(self):
         return self.driver.find_element(By.ID, 'shoppingCartLink')
+
+    def cart_total_amount(self):
+        return self.driver.find_element(By.CSS_SELECTOR, 'tfoot>tr>td>span>label')
 
     def speakers_link(self):
         return self.driver.find_element(By.ID, 'speakersImg')
@@ -179,6 +184,9 @@ class category_page:
 
     def select_product_click(self, product_num: int):
         self.products_list()[product_num - 1].click()
+
+    def category_name(self):
+        return self.driver.find_element(By.CSS_SELECTOR, "[class='categoryTitle roboto-regular sticky ng-binding']")
 
 
 class product_page:

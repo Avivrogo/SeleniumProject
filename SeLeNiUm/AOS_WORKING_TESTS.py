@@ -46,7 +46,7 @@ class Test_AOS(unittest.TestCase):
         sleep(2)
         self.pp.add_to_cart_button().click()
         sleep(1)
-        cart_amount = self.driver.find_element(By.CSS_SELECTOR, 'tfoot>tr>td>span>label').text
+        cart_amount = self.hp.cart_total_amount.text
         self.assertEqual(cart_amount, f"({quantity1 + quantity2} Items)")
         sleep(2)
 
@@ -66,7 +66,7 @@ class Test_AOS(unittest.TestCase):
         self.si.sign_in_button().click()
         sleep(4)
         # check if account actually logged in bi checking if his username next to the account icon
-        site_username = self.driver.find_element(By.CSS_SELECTOR, '[id="menuUserLink"]>span').text
+        site_username = self.hp.show_username().text
         self.assertEqual(site_username, username)
         # if site_username == username:
         #     print("log in test yes")
@@ -77,8 +77,22 @@ class Test_AOS(unittest.TestCase):
         self.hp.account_icon().click()
         self.hp.account_options_list(3)
         sleep(1)
-        site_username = self.driver.find_element(By.CSS_SELECTOR, '[id="menuUserLink"]>span').text
+        site_username = self.hp.show_username().text
         self.assertEqual(site_username, '')
+
+    def testcase7(self):
+        self.wait.until(EC.element_to_be_clickable((self.hp.tablets_link())))
+        self.hp.tablets_link().click()
+        sleep(4)
+        self.cp.select_product_click(2)
+        sleep(3)
+        self.driver.back()
+        self.assertEqual(self.cp.category_name().text, "TABLETS")
+        sleep(2)
+        self.driver.back()
+        self.wait.until(EC.element_to_be_clickable((self.hp.tablets_link())))
+        sleep(1)
+
 
 
 
