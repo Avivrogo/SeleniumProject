@@ -148,11 +148,14 @@ class Test_AOS(TestCase):
         sleep(1)
         self.driver.find_element(By.ID, "pay_now_btn_SAFEPAY").click()
         sleep(1)
+
+        tracknumber = self.driver.find_element(By.CSS_SELECTOR, "#orderNumberLabel").text
+
         self.driver.find_element(By.ID, "menuUserSVGPath").click()
         sleep(1)
         self.driver.find_element(By.XPATH, "//label[@role='link'][normalize-space()='My orders']").click()
         sleep(1)
-        tracknumber = self.driver.find_element(By.CSS_SELECTOR, "#trackingNumberLabel").text
+
         print(tracknumber)
         orderstracknumber = self.driver.find_elements(By.CSS_SELECTOR, "tbody>tr>td:nth-of-type(1)>label.ng-binding")
 
@@ -184,8 +187,36 @@ class Test_AOS(TestCase):
         self.driver.find_element(By.ID, "menuCart").click()
         self.driver.find_element(By.XPATH, "//button[@id='checkOutButton']").click()
 
-        self.mastercard_user_input("eyaltest12")
-        self.mastercard_password_input("Eyal12345")
-        self.driver.find_element(By.NAME, "login_btnundefined").click()
+        self.newuser.neworder_login_user_input("eyaltest12")
+        self.newuser.neworder_login_password_input("Eyal12345")
+        self.driver.find_element(By.ID, "login_btnundefined").click()
         self.driver.find_element(By.ID, "next_btn").click()
-        self.choose_mastercard
+
+        self.newuser.choose_mastercard()
+        self.newuser.mastercard_number("123456789101")
+        self.newuser.mastercard_cvv("564")
+        self.newuser.mastercard_year("2030")
+        self.newuser.mastercard_month("10")
+        self.newuser.mastercard_cardholder_name("eyal")
+        self.driver.find_element(By.ID, "pay_now_btn_ManualPayment").click()
+        sleep(3)
+
+        tracknumber = self.driver.find_element(By.CSS_SELECTOR, "#orderNumberLabel").text
+        self.driver.find_element(By.ID, "menuUserSVGPath").click()
+        sleep(1)
+        self.driver.find_element(By.XPATH, "//label[@role='link'][normalize-space()='My orders']").click()
+        sleep(1)
+        sleep(1)
+        orderstracknumber = self.driver.find_elements(By.CSS_SELECTOR, "tbody>tr>td:nth-of-type(1)>label.ng-binding")
+        tracknumber_found = False
+        for ordertrack in orderstracknumber:
+            if tracknumber == ordertrack.text:
+                tracknumber_found = True
+                break
+
+        if tracknumber_found == True:
+            print(f"Order number {tracknumber} found in order list")
+        else:
+            print(f"Order number {tracknumber} not found in order list")
+        assert tracknumber_found == True
+

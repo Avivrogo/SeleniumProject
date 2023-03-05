@@ -185,22 +185,43 @@ class Register_page:
     def safepay_password_input(self, password):
         self.safepay_password().send_keys(password)
 
-    def mastercard_user(self):
-        return self.driver.find_element(By.NAME, "usernameInOrderPayment")
+    def neworder_login_user(self):
+        return self.driver.find_element(By.XPATH, "//input[@name='usernameInOrderPayment']")
 
-    def mastercard_user_input(self, user):
-        self.mastercard_user().send_keys(user)
+    def neworder_login_user_input(self, user):
+        self.neworder_login_user().send_keys(user)
 
-    def mastercard_password(self):
-        return self.driver.find_element(By.NAME, "passwordInOrderPayment")
+    def neworder_login_password(self):
+        return self.driver.find_element(By.XPATH, "//input[@name='passwordInOrderPayment']")
 
-    def mastercard_password_input(self, password):
-        self.mastercard_password().send_keys(password)
+    def neworder_login_password_input(self, password):
+        self.neworder_login_password().send_keys(password)
 
     def choose_mastercard(self):
-        self.driver.find_element(By.XPATH, "// img[ @ alt = 'Master credit']").click()
+        self.driver.find_element(By.XPATH, "//input[@name='masterCredit']").click()
 
+    def mastercard_number(self, number):
+        self.driver.find_element(By.NAME, "card_number").send_keys(number)
 
+    def mastercard_cvv(self, cvv):
+        self.driver.find_element(By.NAME, "cvv_number").send_keys(cvv)
+
+    def mastercard_month(self, month):
+        month_dropdown = self.driver.find_element(By.NAME, "mmListbox")
+        for option in month_dropdown.find_elements(By.TAG_NAME, 'option'):
+            if month in option.text:
+                option.click()
+                break
+
+    def mastercard_year(self, year):
+        year_dropdown = self.driver.find_element(By.NAME, "yyyyListbox")
+        for option in year_dropdown.find_elements(By.TAG_NAME, 'option'):
+            if year in option.text:
+                option.click()
+                break
+
+    def mastercard_cardholder_name(self, name):
+        self.driver.find_element(By.NAME, "cardholder_name").send_keys(name)
 class category_page:
     def __init__(self, driver: webdriver.Chrome):
         self.driver = driver
