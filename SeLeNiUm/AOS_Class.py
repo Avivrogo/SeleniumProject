@@ -11,7 +11,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 
 # Account details:
 # username: eyal462
-#password: Eyal12345
+# password: Eyal12345
 
 class Home_Page:
     def __init__(self, driver: webdriver.Chrome):
@@ -45,8 +45,6 @@ class Home_Page:
 
     def mice_link(self):
         return self.driver.find_element(By.ID, 'miceImg')
-
-
 
 
 class Sign_in_pop_up:
@@ -83,6 +81,7 @@ class Register_page:
     def __init__(self, driver: webdriver.Chrome):
         self.driver = driver
         self.wait = WebDriverWait(self.driver, 10)
+
     def newaccount_Button(self):
         return self.driver.find_element(By.CSS_SELECTOR, '.create-new-account.ng-scope')
 
@@ -133,6 +132,7 @@ class Register_page:
 
     def new_country(self):
         return self.driver.find_element(By.NAME, 'countryListboxRegisterPage')
+
     def new_country_input(self, country):
         country_listbox = self.new_country()
         for option in country_listbox.find_elements(By.TAG_NAME, 'option'):
@@ -167,6 +167,33 @@ class Register_page:
     def check_agree(self):
 
         return self.driver.find_element(By.CSS_SELECTOR, "input[name='i_agree']")
+
+    def safepay_name(self):
+        return self.driver.find_element(By.NAME, "safepay_username")
+
+    def safepay_name_input(self, name):
+        self.safepay_name().send_keys(name)
+
+    def safepay_password(self):
+        return self.driver.find_element(By.NAME, "safepay_password")
+
+    def safepay_password_input(self, password):
+        self.safepay_password().send_keys(password)
+
+    def mastercard_user(self):
+        return self.driver.find_element(By.NAME, "usernameInOrderPayment")
+
+    def mastercard_user_input(self, user):
+        self.mastercard_user().send_keys(user)
+
+    def mastercard_password(self):
+        return self.driver.find_element(By.NAME, "passwordInOrderPayment")
+
+    def mastercard_password_input(self, password):
+        self.mastercard_password().send_keys(password)
+
+    def choose_mastercard(self):
+        self.driver.find_element(By.XPATH, "// img[ @ alt = 'Master credit']").click()
 
 
 class category_page:
@@ -203,7 +230,6 @@ class product_page:
     def change_quantity(self, quantity: int):
         self.action_chains.move_to_element(self.quantity_field()).click().send_keys(quantity).perform()
         # self.quantity_field().clear().send_keys(quantity)
-
 
     def colors(self):
         return self.driver.find_elements(By.XPATH, '//div[@ng-show="firstImageToShow"]//span')
