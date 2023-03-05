@@ -13,6 +13,8 @@ import unittest
 from AOS_Class import Home_Page, product_page, category_page, Sign_in_pop_up, Register_page
 from tabulate import tabulate
 import pandas as pd
+from openpyxl import load_workbook
+
 
 class Test_AOS(unittest.TestCase):
     def setUp(self):
@@ -30,8 +32,11 @@ class Test_AOS(unittest.TestCase):
         self.newuser = Register_page(self.driver)
     def test_Case1(self):
         # choose quantities for test
-        quantity1 = 4
-        quantity2 = 2
+        wb = load_workbook(r'C:\Users\Admin\Desktop\QA')
+        ws = wb.active
+        quantity1 = ws['C4'].value
+        quantity2 = ws['C8'].value
+
         # wait for category to be clickable than click on speakers
         self.wait.until(EC.element_to_be_clickable((self.hp.speakers_link())))
         self.hp.speakers_link().click()
@@ -55,15 +60,17 @@ class Test_AOS(unittest.TestCase):
         sleep(2)
 
     def test_Case2(self):
-        product1 = "HP ROAR MINI WIRELESS SPEAKER"
-        product2 = "HP ROAR PLUS WIRELESS SPEAKER"
-        product3 = "HP ROAR WIRELESS SPEAKER"
-        amount1 = "1"
-        amount2 = "2"
-        amount3 = "3"
-        color1 = "RED"
-        color2 = "BLUE"
-        color3 = "WHITE"
+        wb = load_workbook(r'C:\Users\Admin\Desktop\QA\data.xlsx')
+        ws = wb.active
+        product1 = ws['C6'].value
+        product2 = ws['C12'].value
+        product3 = ws['C18'].value
+        amount1 = str(ws['C4'].value)
+        amount2 = str(ws['C10'].value)
+        amount3 = str(ws['C16'].value)
+        color1 = ws['C5'].value
+        color2 = ws['C11'].value
+        color3 = ws['C17'].value
         price1 = "44.99"
         price2 = "339.98"
         price3 = "254.97"
@@ -88,6 +95,9 @@ class Test_AOS(unittest.TestCase):
         amounts = self.driver.find_elements(By.XPATH, "//td/a/label[contains(text(), 'QTY')]")
         prices = self.driver.find_elements(By.CSS_SELECTOR, "tbody>tr>td:nth-of-type(3) > p.price")
         colors = self.driver.find_elements(By.XPATH, "//label[contains(text(), 'Color:')]/span")
+
+        print(amount2)
+        print(amounts[1].text[-1] )
         assert products[0].text == product3
         assert products[1].text == product2
         assert products[2].text == product1
