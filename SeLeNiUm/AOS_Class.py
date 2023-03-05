@@ -265,3 +265,19 @@ class product_page:
 
     def color_choose(self, color_num: int):
         self.colors()[color_num + 1].click()
+
+class shopping_cart_page:
+    def __init__(self, driver: webdriver.Chrome):
+        self.driver = driver
+        self.wait = WebDriverWait(self.driver, 10)
+        self.action_chains = ActionChains(self.driver)
+
+    def edit_link(self, product_num_by_order_in_cart: int):
+        return self.driver.find_element(By.XPATH, f'//tbody/tr[{product_num_by_order_in_cart}]/td[6]/span[1]/a[1]')
+
+    def product_amount(self, product_num_by_order_in_cart: int):
+        return self.driver.find_element(By.XPATH, f'//tbody[1]/tr[{product_num_by_order_in_cart}]/td[5]')
+
+    def page_title(self):
+        return self.driver.find_element(By.CLASS_NAME, 'roboto-regular center sticky fixedImportant ng-binding')
+
