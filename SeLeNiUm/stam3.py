@@ -38,6 +38,13 @@ si.sign_in_button().click()
 
 sleep(5)
 
+site_username = driver.find_element(By.CSS_SELECTOR, '[id="menuUserLink"]>span').text
+# prog_username = "eyal462"
+if site_username == "eyal462":
+    print("log in yes")
+else:
+    print("log in no")
+
 # hp.speakers_link().click()
 # sleep(2)
 #

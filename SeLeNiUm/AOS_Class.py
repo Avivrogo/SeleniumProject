@@ -28,8 +28,13 @@ class Home_Page:
         lista = self.driver.find_elements(By.XPATH, "//div[@id='loginMiniTitle']/label")
         return lista[option - 1].click()
 
+    def show_username(self):
+        return self.driver.find_element(By.CSS_SELECTOR, '[id="menuUserLink"]>span')
     def cart_icon(self):
         return self.driver.find_element(By.ID, 'shoppingCartLink')
+
+    def cart_total_amount(self):
+        return self.driver.find_element(By.CSS_SELECTOR, 'tfoot>tr>td>span>label')
 
     def speakers_link(self):
         return self.driver.find_element(By.ID, 'speakersImg')
@@ -207,6 +212,9 @@ class category_page:
     def select_product_click(self, product_num: int):
         self.products_list()[product_num - 1].click()
 
+    def category_name(self):
+        return self.driver.find_element(By.CSS_SELECTOR, "[class='categoryTitle roboto-regular sticky ng-binding']")
+
 
 class product_page:
     def __init__(self, driver: webdriver.Chrome):
@@ -223,11 +231,11 @@ class product_page:
     def plus_quantity_button(self):
         return self.driver.find_element(By.CLASS_NAME, 'plus')
 
-    def plus_quantity_click(self, quantity: int):
+    def plus_quantity_click(self, quantity: str):
         for i in range(quantity - 1):
             self.plus_quantity_button().click()
 
-    def change_quantity(self, quantity: int):
+    def change_quantity(self, quantity: str):
         self.action_chains.move_to_element(self.quantity_field()).click().send_keys(quantity).perform()
         # self.quantity_field().clear().send_keys(quantity)
 
